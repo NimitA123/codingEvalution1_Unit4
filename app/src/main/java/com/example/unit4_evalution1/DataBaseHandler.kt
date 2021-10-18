@@ -75,15 +75,31 @@ class DataBaseHandler(val context: Context): SQLiteOpenHelper(context, "Journalb
         //curson is a class which will return row and column and also some other method
         return listRountain
     }
+    fun update(id:Int, event_name:String, event_desc:String, event_date:String, event_location:String, event_price:String){
+        val db = writableDatabase
+        val value = ContentValues()
+        value.put(Event_Name, event_name)
+        value.put(Event_desc, event_desc)
+        value.put(Event_date, event_date)
+        value.put(Event_Location, event_location)
+        value.put(Event_Price, event_price)
+        val update_value = db.update(TABLE_Name, value, "$id", null)
+        if(update_value> 0){
+           Toast.makeText(context, "Data Updated succussfully", Toast.LENGTH_LONG).show()
+        }
+        else{
+            Toast.makeText(context, "Data Not updated succussfully", Toast.LENGTH_LONG).show()
+        }
+    }
     fun  delete(id:Int){
        val db = writableDatabase
 
        val del = db.delete(TABLE_Name, id.toString(), null)
        if(del>0) {
-           Toast.makeText(context, "Data deleted succussfully", Toast.LENGTH_LONG).show()
+        Toast.makeText(context, "Data deleted succussfully", Toast.LENGTH_LONG).show()
        }
         else{
-           Toast.makeText(context, "Data Not deleted succussfully", Toast.LENGTH_LONG).show()
+          Toast.makeText(context, "Data Not deleted succussfully", Toast.LENGTH_LONG).show()
         }
     }
 
