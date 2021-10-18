@@ -5,8 +5,8 @@ import android.content.ContentValues
 import android.database.Cursor
 import android.net.Uri
 
-class ContentFetcher: ContentProvider() {
-    private var Authority = "com.c1ctech.mydata"
+class ContentFetcher {
+  /****  private var Authority = "com.c1ctech.mydata"
     private var base_path = "Journal"
     private var content_uri =  Uri.parse("content://"+Authority+"/"+base_path)
     override fun onCreate(): Boolean {
@@ -41,4 +41,5 @@ class ContentFetcher: ContentProvider() {
     override fun update(p0: Uri, p1: ContentValues?, p2: String?, p3: Array<out String>?): Int {
         TODO("Not yet implemented")
     }
+  ***********/
 }

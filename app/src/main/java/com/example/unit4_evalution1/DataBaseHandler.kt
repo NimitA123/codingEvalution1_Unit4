@@ -1,11 +1,13 @@
 package com.example.unit4_evalution1
 
 import android.content.ContentValues
+import android.content.Context
+import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
-class DataBaseHandler(val context: ContentFetcher): SQLiteOpenHelper(context, "Journalbd", null, 1) {
+class DataBaseHandler(val context: Context): SQLiteOpenHelper(context, "Journalbd", null, 1) {
     companion object{
         val TABLE_Name = "Journal"
         val Id = "id"
@@ -40,6 +42,38 @@ class DataBaseHandler(val context: ContentFetcher): SQLiteOpenHelper(context, "J
         }
 
 
+    }
+    fun Nimit() : MutableList<EventModel> {
+        val listRountain : MutableList<EventModel> = mutableListOf<EventModel>()
+        val db  = readableDatabase
+        val query  = "SELECT * FROM $TABLE_Name"
+        val cursor: Cursor = db.rawQuery(query, null)
+        if(cursor!=null && cursor.count>0){
+            cursor.moveToFirst()
+            do{
+                val idIndex = cursor.getColumnIndex(Id)
+                val Question = cursor.getColumnIndex(Event_Name)
+                val OptionA = cursor.getColumnIndex(Event_desc)
+                val OptionB = cursor.getColumnIndex(Event_date)
+                val OptionC = cursor.getColumnIndex(Event_Location)
+                val OptionD = cursor.getColumnIndex(Event_Location)
+                val id = cursor.getInt(idIndex)
+                val question = cursor.getString(Question)
+                val optionA = cursor.getString(OptionA)
+                val optionB = cursor.getString(OptionB)
+                val optionC = cursor.getString(OptionC)
+                val optionD = cursor.getString(OptionD)
+                val routainModel = EventModel(id, question, optionA, optionB, optionC, optionD)
+                listRountain.add(routainModel)
+            }
+            while(cursor.moveToNext())
+
+
+        }
+
+
+        //curson is a class which will return row and column and also some other method
+        return listRountain
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
