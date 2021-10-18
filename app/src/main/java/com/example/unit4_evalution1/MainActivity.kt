@@ -13,12 +13,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         dataBaseHandler = DataBaseHandler(this )
-        routineList = dataBaseHandler.Nimit()
-        mAdapter = EventAdapter(this, routineList)
-        rvRecylerview.layoutManager = LinearLayoutManager(this)
-        rvRecylerview.adapter = mAdapter
+        search_view.setOnClickListener {
 
+            routineList = dataBaseHandler.Nimit()
+            mAdapter = EventAdapter(this, routineList)
+            rvRecylerview.layoutManager = LinearLayoutManager(this)
+            rvRecylerview.adapter = mAdapter
+        }
         dataBaseHandler.insertDatabase("Masai School BootCamp", "Coding Contest","12oct", "Banglore", "25000")
+        btnDelete.setOnClickListener {
+            dataBaseHandler.delete(1)
+        }
 
 
     }

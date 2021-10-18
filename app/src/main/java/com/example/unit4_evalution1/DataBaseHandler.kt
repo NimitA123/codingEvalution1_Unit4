@@ -56,7 +56,7 @@ class DataBaseHandler(val context: Context): SQLiteOpenHelper(context, "Journalb
                 val OptionA = cursor.getColumnIndex(Event_desc)
                 val OptionB = cursor.getColumnIndex(Event_date)
                 val OptionC = cursor.getColumnIndex(Event_Location)
-                val OptionD = cursor.getColumnIndex(Event_Location)
+                val OptionD = cursor.getColumnIndex(Event_Price)
                 val id = cursor.getInt(idIndex)
                 val question = cursor.getString(Question)
                 val optionA = cursor.getString(OptionA)
@@ -74,6 +74,17 @@ class DataBaseHandler(val context: Context): SQLiteOpenHelper(context, "Journalb
 
         //curson is a class which will return row and column and also some other method
         return listRountain
+    }
+    fun  delete(id:Int){
+       val db = writableDatabase
+
+       val del = db.delete(TABLE_Name, id.toString(), null)
+       if(del>0) {
+           Toast.makeText(context, "Data deleted succussfully", Toast.LENGTH_LONG).show()
+       }
+        else{
+           Toast.makeText(context, "Data Not deleted succussfully", Toast.LENGTH_LONG).show()
+        }
     }
 
     override fun onUpgrade(p0: SQLiteDatabase?, p1: Int, p2: Int) {
