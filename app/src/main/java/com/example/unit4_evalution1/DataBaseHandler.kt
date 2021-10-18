@@ -1,14 +1,11 @@
 package com.example.unit4_evalution1
 
-import android.content.ContentProvider
-import android.content.ContentProviderClient
 import android.content.ContentValues
-import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.widget.Toast
 
-class DataBaseHandler(val context: Context): SQLiteOpenHelper(context, "Journalbd", null, 1) {
+class DataBaseHandler(val context: ContentFetcher): SQLiteOpenHelper(context, "Journalbd", null, 1) {
     companion object{
         val TABLE_Name = "Journal"
         val Id = "id"
